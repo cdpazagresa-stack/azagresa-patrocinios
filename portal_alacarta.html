@@ -256,11 +256,13 @@
         }
 
         .summary-card {
-            background: linear-gradient(180deg, var(--negro-mate) 0%, #252525 100%);
-            border: 2px solid var(--dorado-centenario);
+            background: linear-gradient(145deg, #1f1f1f 0%, var(--negro-profundo) 100%);
+            border: 1px solid rgba(184, 134, 11, 0.3);
+            border-top: 3px solid var(--dorado-centenario);
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
         }
 
         .summary-title {
@@ -581,7 +583,7 @@
                         <input type="radio" name="pack-selection" id="pack-bronce" class="option-checkbox" onclick="event.stopPropagation();">
                         <div class="option-details">
                             <div class="option-name">PACK BRONCE</div>
-                            <div class="option-desc">Camiseta regional trasera, Lona mediana en campo (3x0.8m), Presencia en pantalla LED y abonos.</div>
+                            <div class="option-desc"> Parte trasera camisetas o sudaderas (si hay disponibilidad) , Lona en campo (3x0.8m), Presencia en pantalla LED, Logo pequeño en Matchday Autonómica y Regional cartel y publicación digital y 1 abono.</div>
                         </div>
                         <div class="option-price">400 €</div>
                     </div>
@@ -590,7 +592,7 @@
                         <input type="radio" name="pack-selection" id="pack-plata" class="option-checkbox" onclick="event.stopPropagation();">
                         <div class="option-details">
                             <div class="option-name">PACK PLATA</div>
-                            <div class="option-desc">Camiseta base/regional frontal, Lona mediana (3x0.8m), Abonos corporativos, Pantalla LED y banner web.</div>
+                            <div class="option-desc"> Frontal camisetas fútbol base o sudaderas o trasera Regional (si hay disponibilidad), Lona en campo U televisión (3x0.8m), Presencia en pantalla LED, Logo pequeño en Matchday Autonómica y Regional cartel y publicación digital y 2 abonos.</div>
                         </div>
                         <div class="option-price">600 €</div>
                     </div>
@@ -599,10 +601,19 @@
                         <input type="radio" name="pack-selection" id="pack-oro" class="option-checkbox" onclick="event.stopPropagation();">
                         <div class="option-details">
                             <div class="option-name">PACK ORO</div>
-                            <div class="option-desc">Camiseta Autonómica (manga/pantaloneta/sudaderas), Lona grande (4x0.8m), Pantalla LED temporada completa, Logo en Peña Azagresa TV.</div>
+                            <div class="option-desc">Camiseta Autonómica (manga/pantaloneta/sudaderas) o Regional Frontal, Lona en U televisiva (4x0.8m), Presencia en pantalla LED, Logo pequeño en Matchday Autonómica y Regional cartel y publicación digital y 3 abonos.</div>
                         </div>
-                        <div class="option-price">1.000 €</div>
+                        <div class="option-price">1000 €</div>
                     </div>
+                    <div class="option-item" onclick="selectPack('platinum', 2000)">
+                        <input type="radio" name="pack-selection" id="pack-platinum" class="option-checkbox" onclick="event.stopPropagation();">
+                        <div class="option-details">
+                            <div class="option-name">PACK PLATINUM</div>
+                            <div class="option-desc">Camiseta Frontal Autonómica (manga/pantaloneta/sudaderas) o Regional Frontal, Lona en U televisiva (4x0.8m), Presencia en pantalla LED, Logo grande en Matchday Autonómica y Regional cartel y publicación digital, Banner web, Banner Grande Plataforma E+ y 4 abonos.</div>
+                        </div>
+                        <div class="option-price">A convenir €</div>
+                    </div>
+
                 </div>
             </section>
 
@@ -614,32 +625,6 @@
                 </h2>
                 <p style="color: var(--texto-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Despliega las categorías para ver las opciones disponibles y sus precios (sin IVA).</p>
                 
-                <!-- Ropa Accordion -->
-                <details class="option-details-group">
-                    <summary class="group-header">
-                        <span>Ropa y Equipaciones</span>
-                        <span class="chevron-icon">▼</span>
-                    </summary>
-                    <div class="group-content">
-                        <div class="option-item custom-option" onclick="toggleOption(event, 'ropa-frontal-auto', 1200, 'Publicidad Camiseta Frontal Autonómica')">
-                            <input type="checkbox" id="ropa-frontal-auto" class="option-checkbox">
-                            <div class="option-details">
-                                <div class="option-name">Camiseta Frontal (1ª Autonómica)</div>
-                                <div class="option-desc">Publicidad en el frontal de las camisetas de juego del primer equipo. Visibilidad máxima en toda Navarra.</div>
-                            </div>
-                            <div class="option-price">1.200 €</div>
-                        </div>
-
-                        <div class="option-item custom-option" onclick="toggleOption(event, 'ropa-trasera-auto', 600, 'Publicidad Camiseta Trasera Autonómica')">
-                            <input type="checkbox" id="ropa-trasera-auto" class="option-checkbox">
-                            <div class="option-details">
-                                <div class="option-name">Camiseta Trasera o Manga (1ª Autonómica)</div>
-                                <div class="option-desc">Ubicación preferencial bajo el dorsal o en la manga izquierda de juego.</div>
-                            </div>
-                            <div class="option-price">600 €</div>
-                        </div>
-                    </div>
-                </details>
 
                 <!-- Campo Accordion -->
                 <details class="option-details-group">
@@ -648,19 +633,19 @@
                         <span class="chevron-icon">▼</span>
                     </summary>
                     <div class="group-content">
-                        <div class="option-item custom-option" onclick="toggleOption(event, 'campo-lona-grande', 350, 'Lona Publicitaria Grande (4x0.8m)')">
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'campo-lona-grande', 350, 'Lona Publicitaria Grande U televisiva (4x0.8m)')">
                             <input type="checkbox" id="campo-lona-grande" class="option-checkbox">
                             <div class="option-details">
-                                <div class="option-name">Lona Perimetral Grande (4 x 0.8 metros)</div>
-                                <div class="option-desc">Valla publicitaria de gran tamaño en el primer anillo alrededor del terreno de juego.</div>
+                                <div class="option-name">Lona grande (4 x 0.8 metros) en U televisión </div>
+                                <div class="option-desc">Lona publicitaria de gran tamaño en el anillo alrededor del terreno de juego .</div>
                             </div>
                             <div class="option-price">350 €</div>
                         </div>
 
-                        <div class="option-item custom-option" onclick="toggleOption(event, 'campo-lona-mediana', 250, 'Lona Publicitaria Mediana (3x0.8m)')">
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'campo-lona-mediana', 250, 'Lona Publicitaria Resto Campo (3x0.8m)')">
                             <input type="checkbox" id="campo-lona-mediana" class="option-checkbox">
                             <div class="option-details">
-                                <div class="option-name">Lona Perimetral Mediana (3 x 0.8 metros)</div>
+                                <div class="option-name">Lona publicitaria resto campo (3 x 0.8 metros)</div>
                                 <div class="option-desc">Valla publicitaria estándar en el Miguel Sola.</div>
                             </div>
                             <div class="option-price">250 €</div>
@@ -684,13 +669,13 @@
                         <span class="chevron-icon">▼</span>
                     </summary>
                     <div class="group-content">
-                        <div class="option-item custom-option" onclick="toggleOption(event, 'led-temporada', 100, 'Pantalla LED Campo - Temporada')">
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'led-temporada', 150, 'Pantalla LED Campo - Temporada')">
                             <input type="checkbox" id="led-temporada" class="option-checkbox">
                             <div class="option-details">
                                 <div class="option-name">Pantalla LED a pie de campo (Temporada Completa)</div>
                                 <div class="option-desc">Vídeo/Imagen de 10-15s en rotación constante en pantalla digital de 6 m² durante entrenos y partidos (>3.000 emisiones).</div>
                             </div>
-                            <div class="option-price">100 €</div>
+                            <div class="option-price">150 €</div>
                         </div>
 
                         <div class="option-item custom-option" onclick="toggleOption(event, 'eplus-exclusivo', 1200, 'Streaming E+ - Banner Exclusivo')">
@@ -715,10 +700,18 @@
                             <input type="checkbox" id="rrss-semanal" class="option-checkbox">
                             <div class="option-details">
                                 <div class="option-name">Banner Semanal en Publicaciones (Redes Sociales)</div>
-                                <div class="option-desc">Banner publicitario en las creatividades de convocatorias, alineaciones oficiales y resultados de los fines de semana.</div>
+                                <div class="option-desc">Banner publicitario en las creatividades de convocatorias, alineaciones oficiales, señalamientos y resultados de los fines de semana.</div>
                             </div>
                             <div class="option-price">300 €</div>
                         </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'rrss-semanal', 500, 'Banner Semanal Gol y/o Parada Semana')">
+                            <input type="checkbox" id="rrss-semanal" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Banner Semanal en Videos Resumen Partidos, Mejor Gol y/o Parada de la Semana (Redes Sociales)</div>
+                                <div class="option-desc">Banner publicitario en los vídeos generados por los resúmenes de los partidos, Mejor Gol y/o Parada de la semana</div>
+                            </div>
+                            <div class="option-price">500 €</div>
                     </div>
                 </details>
 
@@ -849,7 +842,7 @@
         <div class="footer-text">
             <strong>C.D. Peña Azagresa</strong><br>
             Campaña oficial de patrocinios para el centenario y la temporada 2026/2027.<br>
-            Dirección: C/ Crta. Variante, s/n Km. 50, 31560 Azagra (Navarra) | cdpazagresa@gmail.com
+            Dirección: C/ Crta. Variante, s/n, 31560 Azagra (Navarra) | cdpazagresa@gmail.com
         </div>
         <div class="footer-line"></div>
         <div style="font-size: 0.8rem; color: var(--texto-muted);">
@@ -946,16 +939,19 @@
             const isNavarra = document.getElementById('navarraToggle').checked;
             let subtotal = 0;
             const summaryList = document.getElementById('summaryList');
+            const emptyMsg = document.getElementById('emptySummaryMessage');
+            
+            // Vaciar la lista pero mantener el mensaje de "vacío"
             summaryList.innerHTML = '';
+            summaryList.appendChild(emptyMsg);
 
             const keys = Object.keys(selectedOptions);
 
             if (keys.length === 0) {
-                document.getElementById('emptySummaryMessage').style.display = 'block';
-                summaryList.appendChild(document.getElementById('emptySummaryMessage'));
+                emptyMsg.style.display = 'block';
                 subtotal = 0;
             } else {
-                document.getElementById('emptySummaryMessage').style.display = 'none';
+                emptyMsg.style.display = 'none';
                 keys.forEach(key => {
                     const opt = selectedOptions[key];
                     subtotal += opt.price;
@@ -1036,15 +1032,15 @@
             btn.textContent = 'Enviando...';
 
             // Cambiar por URL real del Webhook en Make.com
-            const WEBHOOK_URL = 'https://hook.us2.make.com/YOUR_WEBHOOK_ID_HERE';
+            const WEBHOOK_URL = 'https://hook.eu2.make.com/dgzezl4p4f52fxkbu7vz3so1ga1tsh6n';
 
             fetch(WEBHOOK_URL, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 },
-                body: JSON.stringify(payload),
-                mode: 'cors'
+                body: JSON.stringify(payload)
             })
             .then(res => {
                 btn.textContent = '¡Solicitado con éxito!';
