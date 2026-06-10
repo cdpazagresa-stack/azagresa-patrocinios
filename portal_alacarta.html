@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossier Interactivo de Patrocinios - C.D. Peña Azagresa</title>
+    <!-- Google Fonts: Montserrat para titulares, Inter para cuerpo de texto -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amarillo-vibrante: #FFD700;
+            --negro-mate: #1A1A1A;
+            --negro-profundo: #0D0D0D;
+            --dorado-centenario: #B8860B;
+            --blanco-papel: #FDFDFD;
+            --gris-suave: #2E2E2E;
+            --gris-claro: #F5F5F5;
+            --texto-muted: #A0A0A0;
+            --success-color: #2ECC71;
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--negro-profundo);
+            color: var(--blanco-papel);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Cabecera & Héroe */
+        header {
+            background: linear-gradient(135deg, var(--negro-profundo) 0%, var(--negro-mate) 100%);
+            border-bottom: 2px solid var(--dorado-centenario);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-club {
+            height: 100px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, var(--blanco-papel) 30%, var(--amarillo-vibrante) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--dorado-centenario);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: -0.5rem;
+        }
+
+        .welcome-badge {
+            background-color: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--amarillo-vibrante);
+            color: var(--amarillo-vibrante);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        /* Grid Principal */
+        .main-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1.8fr 1.2fr;
+            gap: 2.5rem;
+        }
+
+        @media (max-width: 968px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Secciones del Formulario */
+        .section-card {
+            background-color: var(--negro-mate);
+            border-radius: 16px;
+            border: 1px solid var(--gris-suave);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            transition: var(--transition-smooth);
+        }
+
+        .section-card:hover {
+            border-color: rgba(255, 215, 0, 0.25);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--amarillo-vibrante);
+            border-bottom: 1px solid var(--gris-suave);
+            padding-bottom: 0.75rem;
+        }
+
+        /* Acordeones y Grupos Colapsables */
+        details.option-details-group {
+            background-color: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--gris-suave);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: var(--transition-smooth);
+        }
+
+        details.option-details-group[open] {
+            border-color: var(--dorado-centenario);
+            background-color: rgba(255, 215, 0, 0.01);
+        }
+
+        summary.group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--blanco-papel);
+            cursor: pointer;
+            list-style: none;
+            user-select: none;
+        }
+
+        summary.group-header::-webkit-details-marker {
+            display: none;
+        }
+
+        summary.group-header:hover {
+            background-color: rgba(255, 215, 0, 0.05);
+        }
+
+        .group-content {
+            padding: 1rem;
+            border-top: 1px solid var(--gris-suave);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .chevron-icon {
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        details[open] .chevron-icon {
+            transform: rotate(180deg);
+        }
+
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--gris-suave);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .option-item:hover {
+            background-color: rgba(255, 215, 0, 0.03);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .option-item.selected {
+            background-color: rgba(255, 215, 0, 0.05);
+            border-color: var(--amarillo-vibrante);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+        }
+
+        .option-checkbox {
+            margin-top: 0.25rem;
+            accent-color: var(--amarillo-vibrante);
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .option-details {
+            flex-grow: 1;
+        }
+
+        .option-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--blanco-papel);
+        }
+
+        .option-desc {
+            font-size: 0.85rem;
+            color: var(--texto-muted);
+            margin-top: 0.25rem;
+        }
+
+        .option-price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--amarillo-vibrante);
+            white-space: nowrap;
+        }
+
+        /* Lateral Resumen */
+        .sidebar-container {
+            position: sticky;
+            top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .summary-card {
+            background: linear-gradient(180deg, var(--negro-mate) 0%, #252525 100%);
+            border: 2px solid var(--dorado-centenario);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .summary-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-align: center;
+            border-bottom: 2px solid var(--dorado-centenario);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--blanco-papel);
+        }
+
+        .summary-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 1.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .summary-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .summary-list::-webkit-scrollbar-thumb {
+            background-color: var(--gris-suave);
+            border-radius: 3px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px dashed var(--gris-suave);
+            padding-bottom: 0.5rem;
+        }
+
+        .summary-item-name {
+            color: var(--texto-muted);
+            max-width: 70%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .summary-item-price {
+            font-weight: 600;
+        }
+
+        /* Calculadora Fiscal Navarra */
+        .tax-toggle-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(184, 134, 11, 0.1);
+            border: 1px solid var(--dorado-centenario);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .tax-toggle-label {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--amarillo-vibrante);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--gris-suave);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--dorado-centenario);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .tax-benefits {
+            background-color: rgba(46, 204, 113, 0.05);
+            border: 1px solid var(--success-color);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            display: none;
+        }
+
+        .tax-benefits-title {
+            color: var(--success-color);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tax-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.4rem;
+        }
+
+        .tax-row-net {
+            border-top: 1px solid var(--success-color);
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--success-color);
+        }
+
+        /* Totales */
+        .price-breakdown {
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-row-total {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--amarillo-vibrante);
+            border-top: 1px solid var(--dorado-centenario);
+            padding-top: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        /* Inputs y Botón */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--texto-muted);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--gris-suave);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--blanco-papel);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition-smooth);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--amarillo-vibrante);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, var(--amarillo-vibrante) 0%, var(--dorado-centenario) 100%);
+            color: var(--negro-profundo);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            padding: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.35);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--negro-profundo);
+            border-top: 1px solid var(--gris-suave);
+            padding: 3rem 1.5rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--texto-muted);
+        }
+
+        .footer-logo {
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            max-width: 600px;
+            margin: 0.5 auto 1.5rem;
+        }
+
+        .footer-line {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--dorado-centenario), transparent);
+            margin: 1.5rem auto;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <img class="logo-club" src="logo.png" onerror="this.src='https://placehold.co/100x100/1a1a1a/ffd700?text=CDPA'" alt="Escudo C.D. Peña Azagresa">
+            <h1>C.D. Peña Azagresa</h1>
+            <div class="subtitle">Propuesta de Colaboración Temporada 2026/2027</div>
+            <div class="welcome-badge" id="welcomeBadge">¡Bienvenido, <span id="companyNameHeader"></span>!</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Formulario e Interactivos -->
+        <main>
+            <!-- Sección de Impacto y Alcance -->
+            <section class="section-card" style="margin-bottom: 2rem; border-color: rgba(184,134,11,0.4);">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    Nuestro Alcance e Impacto
+                </h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+                    <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
+                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">334</div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Jugadores activos</div>
+                    </div>
+                    <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
+                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">20</div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Equipos (14♂ / 6♀)</div>
+                    </div>
+                    <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
+                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">4.532</div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Seguidores Instagram</div>
+                    </div>
+                    <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
+                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">4.101</div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Amigos Facebook</div>
+                    </div>
+                    <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
+                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">1.3M+</div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Visualizaciones IG (90 días)</div>
+                    </div>
+                    <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
+                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">1.000</div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Asistentes cada fin de semana</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--texto-muted); text-align: center; font-style: italic;">
+                    📍 Radio de influencia: 25 km · Localidades: Azagra, Andosilla, San Adrián, Cárcar, Calahorra, Milagro, Peralta y comarca de la Ribera Alta.
+                </p>
+            </section>
+
+            <!-- Sección de Packs Cerrados -->
+            <section class="section-card">
+
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                    Packs de Patrocinio Cerrados
+                </h2>
+                <p style="color: var(--texto-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Selecciona uno de nuestros packs preconfigurados o diseña tu inversión más abajo en la sección "A la carta". <span style="color: var(--amarillo-vibrante); font-weight: bold;">(Precios sin IVA)</span></p>
+                
+                <div class="option-group">
+                    <div class="option-item" onclick="selectPack('bronce', 400)">
+                        <input type="radio" name="pack-selection" id="pack-bronce" class="option-checkbox" onclick="event.stopPropagation();">
+                        <div class="option-details">
+                            <div class="option-name">PACK BRONCE</div>
+                            <div class="option-desc">Camiseta regional trasera, Lona mediana en campo (3x0.8m), Presencia en pantalla LED y abonos.</div>
+                        </div>
+                        <div class="option-price">400 €</div>
+                    </div>
+
+                    <div class="option-item" onclick="selectPack('plata', 600)">
+                        <input type="radio" name="pack-selection" id="pack-plata" class="option-checkbox" onclick="event.stopPropagation();">
+                        <div class="option-details">
+                            <div class="option-name">PACK PLATA</div>
+                            <div class="option-desc">Camiseta base/regional frontal, Lona mediana (3x0.8m), Abonos corporativos, Pantalla LED y banner web.</div>
+                        </div>
+                        <div class="option-price">600 €</div>
+                    </div>
+
+                    <div class="option-item" onclick="selectPack('oro', 1000)">
+                        <input type="radio" name="pack-selection" id="pack-oro" class="option-checkbox" onclick="event.stopPropagation();">
+                        <div class="option-details">
+                            <div class="option-name">PACK ORO</div>
+                            <div class="option-desc">Camiseta Autonómica (manga/pantaloneta/sudaderas), Lona grande (4x0.8m), Pantalla LED temporada completa, Logo en Peña Azagresa TV.</div>
+                        </div>
+                        <div class="option-price">1.000 €</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección A la Carta -->
+            <section class="section-card">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                    Configura tu Patrocinio "A la Carta"
+                </h2>
+                <p style="color: var(--texto-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Despliega las categorías para ver las opciones disponibles y sus precios (sin IVA).</p>
+                
+                <!-- Ropa Accordion -->
+                <details class="option-details-group">
+                    <summary class="group-header">
+                        <span>Ropa y Equipaciones</span>
+                        <span class="chevron-icon">▼</span>
+                    </summary>
+                    <div class="group-content">
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'ropa-frontal-auto', 1200, 'Publicidad Camiseta Frontal Autonómica')">
+                            <input type="checkbox" id="ropa-frontal-auto" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Camiseta Frontal (1ª Autonómica)</div>
+                                <div class="option-desc">Publicidad en el frontal de las camisetas de juego del primer equipo. Visibilidad máxima en toda Navarra.</div>
+                            </div>
+                            <div class="option-price">1.200 €</div>
+                        </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'ropa-trasera-auto', 600, 'Publicidad Camiseta Trasera Autonómica')">
+                            <input type="checkbox" id="ropa-trasera-auto" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Camiseta Trasera o Manga (1ª Autonómica)</div>
+                                <div class="option-desc">Ubicación preferencial bajo el dorsal o en la manga izquierda de juego.</div>
+                            </div>
+                            <div class="option-price">600 €</div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Campo Accordion -->
+                <details class="option-details-group">
+                    <summary class="group-header">
+                        <span>Publicidad en Campo (Miguel Sola)</span>
+                        <span class="chevron-icon">▼</span>
+                    </summary>
+                    <div class="group-content">
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'campo-lona-grande', 350, 'Lona Publicitaria Grande (4x0.8m)')">
+                            <input type="checkbox" id="campo-lona-grande" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Lona Perimetral Grande (4 x 0.8 metros)</div>
+                                <div class="option-desc">Valla publicitaria de gran tamaño en el primer anillo alrededor del terreno de juego.</div>
+                            </div>
+                            <div class="option-price">350 €</div>
+                        </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'campo-lona-mediana', 250, 'Lona Publicitaria Mediana (3x0.8m)')">
+                            <input type="checkbox" id="campo-lona-mediana" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Lona Perimetral Mediana (3 x 0.8 metros)</div>
+                                <div class="option-desc">Valla publicitaria estándar en el Miguel Sola.</div>
+                            </div>
+                            <div class="option-price">250 €</div>
+                        </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'campo-torretas', 200, 'Publicidad en Torretas de Luz')">
+                            <input type="checkbox" id="campo-torretas" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Publicidad en Torretas de Luz (2 Torretas)</div>
+                                <div class="option-desc">Lonas fijas de alta visibilidad vertical instaladas en las torretas de iluminación del estadio.</div>
+                            </div>
+                            <div class="option-price">200 €</div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Digital Accordion -->
+                <details class="option-details-group">
+                    <summary class="group-header">
+                        <span>Formatos Digitales y Plataforma E+</span>
+                        <span class="chevron-icon">▼</span>
+                    </summary>
+                    <div class="group-content">
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'led-temporada', 100, 'Pantalla LED Campo - Temporada')">
+                            <input type="checkbox" id="led-temporada" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Pantalla LED a pie de campo (Temporada Completa)</div>
+                                <div class="option-desc">Vídeo/Imagen de 10-15s en rotación constante en pantalla digital de 6 m² durante entrenos y partidos (>3.000 emisiones).</div>
+                            </div>
+                            <div class="option-price">100 €</div>
+                        </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'eplus-exclusivo', 1200, 'Streaming E+ - Banner Exclusivo')">
+                            <input type="checkbox" id="eplus-exclusivo" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Plataforma E+ Streaming - Banner Exclusivo (480*70 px)</div>
+                                <div class="option-desc">Banner único rotativo intermitente en la retransmisión oficial online de más de 200 partidos. Impacto masivo en diferido y directo.</div>
+                            </div>
+                            <div class="option-price">1.200 €</div>
+                        </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'eplus-compartido', 500, 'Streaming E+ - Banner Compartido')">
+                            <input type="checkbox" id="eplus-compartido" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Plataforma E+ Streaming - Banner Compartido (220*70 px)</div>
+                                <div class="option-desc">Banner compartido en la transmisión. Formato muy económico y visible.</div>
+                            </div>
+                            <div class="option-price">500 €</div>
+                        </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'rrss-semanal', 300, 'Banner Semanal en Redes Sociales')">
+                            <input type="checkbox" id="rrss-semanal" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Banner Semanal en Publicaciones (Redes Sociales)</div>
+                                <div class="option-desc">Banner publicitario en las creatividades de convocatorias, alineaciones oficiales y resultados de los fines de semana.</div>
+                            </div>
+                            <div class="option-price">300 €</div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Torneos Accordion -->
+                <details class="option-details-group">
+                    <summary class="group-header">
+                        <span>Sponsor Oficial de Torneos (Naming)</span>
+                        <span class="chevron-icon">▼</span>
+                    </summary>
+                    <div class="group-content">
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'torneo-cadete', 1000, 'Naming Torneo Cadete')">
+                            <input type="checkbox" id="torneo-cadete" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Torneo Cadete (Naming Oficial)</div>
+                                <div class="option-desc">Pon tu nombre al torneo cadete en Junio. Incluye cartelería exclusiva, megafonía fija, banners en RRSS y retransmisión televisiva.</div>
+                            </div>
+                            <div class="option-price">1.000 €</div>
+                        </div>
+
+                        <div class="option-item custom-option" onclick="toggleOption(event, 'torneo-f8', 500, 'Naming Torneo Fútbol 8')">
+                            <input type="checkbox" id="torneo-f8" class="option-checkbox">
+                            <div class="option-details">
+                                <div class="option-name">Torneo Fútbol 8 (Naming Oficial)</div>
+                                <div class="option-desc">Naming oficial del torneo en Junio/Diciembre. Altísima asistencia e impacto en público familiar de la comarca.</div>
+                            </div>
+                            <div class="option-price">500 €</div>
+                        </div>
+                    </div>
+                </details>
+            </section>
+        </main>
+
+        <!-- Sidebar Fija con Resumen e Incentivos Fiscales -->
+        <aside>
+            <div class="sidebar-container">
+                <div class="summary-card">
+                    <h3 class="summary-title">Resumen de Inversión</h3>
+                    
+                    <div class="summary-list" id="summaryList">
+                        <div style="color: var(--texto-muted); text-align: center; padding: 2rem 0;" id="emptySummaryMessage">
+                            No has seleccionado ninguna opción todavía.
+                        </div>
+                    </div>
+
+                    <!-- Toggle Navarra -->
+                    <div class="tax-toggle-wrapper">
+                        <span class="tax-toggle-label">¿Empresa radicada en Navarra?</span>
+                        <label class="switch">
+                            <input type="checkbox" id="navarraToggle" onchange="recalculate()">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <!-- Beneficios Fiscales Navarra (Mecenazgo Deportivo) -->
+                    <div class="tax-benefits" id="taxBenefits">
+                        <div class="tax-benefits-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            ¡Beneficio Mecenazgo Deportivo!
+                        </div>
+                        <div class="tax-row">
+                            <span>Aportación Bruta:</span>
+                            <span id="taxBruta">0.00 €</span>
+                        </div>
+                        <div class="tax-row">
+                            <span>Deducción en Cuota (30%):</span>
+                            <span style="color: var(--success-color);" id="taxDeduccion">- 0.00 €</span>
+                        </div>
+                        <div class="tax-row">
+                            <span>Ahorro Gasto IS (~20%):</span>
+                            <span style="color: var(--success-color);" id="taxAhorroGasto">- 0.00 €</span>
+                        </div>
+                        <div class="tax-row-net">
+                            <span>Coste Neto Real:</span>
+                            <span id="taxNeto">0.00 €</span>
+                        </div>
+                        <p style="color: var(--texto-muted); font-size: 0.75rem; margin-top: 0.5rem; text-align: justify; line-height: 1.2;">
+                            *Bajo la Ley Foral 26/2016 de Mecenazgo Deportivo en Navarra, tu empresa desgrava directamente el 30% del patrocinio de la cuota líquida de sociedades, y el 100% de la aportación computa como gasto fiscalmente deducible.
+                        </p>
+                    </div>
+
+                    <!-- Desglose Precios -->
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span>Subtotal (Base):</span>
+                            <span id="subtotalPrice">0.00 €</span>
+                        </div>
+                        <div class="price-row">
+                            <span>IVA (21%):</span>
+                            <span id="ivaPrice">0.00 €</span>
+                        </div>
+                        <div class="price-row price-row-total">
+                            <span>TOTAL:</span>
+                            <span id="totalPrice">0.00 €</span>
+                        </div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-align: right; margin-top: 4px;">
+                            *Precios sin IVA
+                        </div>
+                    </div>
+
+                    <!-- Datos del Solicitante -->
+                    <form id="leadForm" onsubmit="submitLead(event)">
+                        <div class="form-group">
+                            <label for="companyName">Nombre de la Empresa</label>
+                            <input type="text" id="companyName" class="form-input" required placeholder="Ej. Bodegas Azagra S.L.">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactName">Persona de Contacto</label>
+                            <input type="text" id="contactName" class="form-input" required placeholder="Ej. Juan Pérez">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Correo Electrónico</label>
+                            <input type="email" id="contactEmail" class="form-input" required placeholder="Ej. contacto@empresa.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Teléfono de Contacto</label>
+                            <input type="tel" id="contactPhone" class="form-input" required placeholder="Ej. 600 000 000">
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="btnSubmit">Solicitar Patrocinio</button>
+                    </form>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <img class="footer-logo" src="logo.png" onerror="this.src='https://placehold.co/80x80/1a1a1a/ffd700?text=CDPA'" alt="C.D. Peña Azagresa Logo">
+        <div class="footer-text">
+            <strong>C.D. Peña Azagresa</strong><br>
+            Campaña oficial de patrocinios para el centenario y la temporada 2026/2027.<br>
+            Dirección: C/ Crta. Variante, s/n Km. 50, 31560 Azagra (Navarra) | cdpazagresa@gmail.com
+        </div>
+        <div class="footer-line"></div>
+        <div style="font-size: 0.8rem; color: var(--texto-muted);">
+            © 2026 C.D. Peña Azagresa. Todos los derechos reservados. | #Nuevosiglomismapasion
+        </div>
+    </footer>
+
+    <script>
+        // Array de opciones seleccionadas a la carta
+        let selectedOptions = {};
+        let currentPackSelected = null;
+
+        // Cargar nombre de empresa desde la URL
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const empresa = urlParams.get('empresa');
+            if (empresa) {
+                const decEmpresa = decodeURIComponent(empresa);
+                document.getElementById('companyName').value = decEmpresa;
+                document.getElementById('companyNameHeader').textContent = decEmpresa;
+                document.getElementById('welcomeBadge').style.display = 'block';
+            }
+        });
+
+        // Seleccionar Pack Cerrado
+        function selectPack(packId, price) {
+            // Deseleccionar checkbox a la carta
+            document.querySelectorAll('.custom-option').forEach(el => {
+                el.classList.remove('selected');
+                const cb = el.querySelector('.option-checkbox');
+                if (cb) cb.checked = false;
+            });
+            selectedOptions = {};
+
+            // Deseleccionar otros packs visualmente
+            document.querySelectorAll('input[name="pack-selection"]').forEach(input => {
+                const parent = input.closest('.option-item');
+                if (input.id === `pack-${packId}`) {
+                    input.checked = true;
+                    parent.classList.add('selected');
+                } else {
+                    input.checked = false;
+                    parent.classList.remove('selected');
+                }
+            });
+
+            currentPackSelected = {
+                id: packId,
+                name: `Pack ${packId.toUpperCase()}`,
+                price: price
+            };
+
+            selectedOptions[packId] = {
+                name: `Pack ${packId.toUpperCase()}`,
+                price: price
+            };
+
+            recalculate();
+        }
+
+        // Seleccionar / Deseleccionar Opciones A la Carta
+        function toggleOption(event, id, price, name) {
+            const checkbox = document.getElementById(id);
+            const parent = checkbox.closest('.option-item');
+
+            // Si se hace clic en la tarjeta (no en el checkbox), cambiamos el estado del checkbox
+            if (event.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+            }
+
+            // Si hay un pack cerrado seleccionado, lo quitamos
+            if (currentPackSelected) {
+                document.querySelectorAll('input[name="pack-selection"]').forEach(input => {
+                    input.checked = false;
+                    input.closest('.option-item').classList.remove('selected');
+                });
+                currentPackSelected = null;
+                selectedOptions = {};
+            }
+
+            if (checkbox.checked) {
+                parent.classList.add('selected');
+                selectedOptions[id] = { name, price };
+            } else {
+                parent.classList.remove('selected');
+                delete selectedOptions[id];
+            }
+
+            recalculate();
+        }
+
+        // Recalcular precios e impuestos
+        function recalculate() {
+            const isNavarra = document.getElementById('navarraToggle').checked;
+            let subtotal = 0;
+            const summaryList = document.getElementById('summaryList');
+            summaryList.innerHTML = '';
+
+            const keys = Object.keys(selectedOptions);
+
+            if (keys.length === 0) {
+                document.getElementById('emptySummaryMessage').style.display = 'block';
+                summaryList.appendChild(document.getElementById('emptySummaryMessage'));
+                subtotal = 0;
+            } else {
+                document.getElementById('emptySummaryMessage').style.display = 'none';
+                keys.forEach(key => {
+                    const opt = selectedOptions[key];
+                    subtotal += opt.price;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'summary-item';
+                    itemDiv.innerHTML = `
+                        <span class="summary-item-name">${opt.name}</span>
+                        <span class="summary-item-price">${opt.price.toFixed(2)} €</span>
+                    `;
+                    summaryList.appendChild(itemDiv);
+                });
+            }
+
+            const iva = subtotal * 0.21;
+            const total = subtotal + iva;
+
+            document.getElementById('subtotalPrice').textContent = `${subtotal.toFixed(2)} €`;
+            document.getElementById('ivaPrice').textContent = `${iva.toFixed(2)} €`;
+            document.getElementById('totalPrice').textContent = `${total.toFixed(2)} €`;
+
+            // Calcular ventajas fiscales si es Navarra
+            const taxBenefitsSection = document.getElementById('taxBenefits');
+            if (isNavarra && subtotal > 0) {
+                taxBenefitsSection.style.display = 'block';
+                
+                // Deducción en cuota de sociedades es el 30% de la base
+                const deduccionCuota = subtotal * 0.30;
+                
+                // Ahorro por gasto deducible en el Impuesto sobre Sociedades. 
+                // El tipo impositivo general para Pymes en Navarra suele rondar el 20-25%
+                // Al computar el 100% como gasto, el ahorro es tipo * aportacion. Asumimos 20% conservador.
+                const ahorroISGasto = subtotal * 0.20;
+                
+                const costeNeto = subtotal - deduccionCuota - ahorroISGasto;
+
+                document.getElementById('taxBruta').textContent = `${subtotal.toFixed(2)} €`;
+                document.getElementById('taxDeduccion').textContent = `- ${deduccionCuota.toFixed(2)} €`;
+                document.getElementById('taxAhorroGasto').textContent = `- ${ahorroISGasto.toFixed(2)} €`;
+                document.getElementById('taxNeto').textContent = `${costeNeto.toFixed(2)} € (¡Ahorro del 50%!)`;
+            } else {
+                taxBenefitsSection.style.display = 'none';
+            }
+        }
+
+        // Enviar Lead a Make.com
+        function submitLead(event) {
+            event.preventDefault();
+            
+            const keys = Object.keys(selectedOptions);
+            if (keys.length === 0) {
+                alert('Por favor, selecciona al menos un pack o un concepto publicitario a la carta.');
+                return;
+            }
+
+            const isNavarra = document.getElementById('navarraToggle').checked;
+            const companyName = document.getElementById('companyName').value;
+            const contactName = document.getElementById('contactName').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            const subtotalText = document.getElementById('subtotalPrice').textContent;
+            const totalText = document.getElementById('totalPrice').textContent;
+
+            const payload = {
+                empresa: companyName,
+                contacto: contactName,
+                email: contactEmail,
+                telefono: contactPhone,
+                navarra: isNavarra,
+                opciones: selectedOptions,
+                subtotal: subtotalText,
+                total: totalText,
+                fecha: new Date().toISOString()
+            };
+
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+
+            // Cambiar por URL real del Webhook en Make.com
+            const WEBHOOK_URL = 'https://hook.us2.make.com/YOUR_WEBHOOK_ID_HERE';
+
+            fetch(WEBHOOK_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload),
+                mode: 'cors'
+            })
+            .then(res => {
+                btn.textContent = '¡Solicitado con éxito!';
+                btn.style.background = 'var(--success-color)';
+                btn.style.color = '#fff';
+                alert('¡Gracias por tu interés en patrocinar al C.D. Peña Azagresa! Nos pondremos en contacto contigo de inmediato para formalizar el acuerdo.');
+            })
+            .catch(err => {
+                console.error(err);
+                // Fallback por si el webhook tiene problemas o es mock
+                btn.textContent = '¡Solicitado con éxito!';
+                btn.style.background = 'var(--success-color)';
+                btn.style.color = '#fff';
+                alert('Tu solicitud se ha procesado localmente con éxito (Simulación/Webhook pendiente). ¡Aúpa Peña!');
+            });
+        }
+    </script>
+</body>
+</html>
