@@ -518,6 +518,10 @@
             margin: 1.5rem auto;
             max-width: 300px;
         }
+    
+        #summaryList.hide-prices .summary-item-price {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -755,15 +759,15 @@
         <aside>
             <div class="sidebar-container">
                 <div class="summary-card">
-                    <div id="calculatorResults" style="display:none;">
-                        <h3 class="summary-title">Resumen de Inversión</h3>
-                        
-                        <div class="summary-list" id="summaryList">
-                            <div style="color: var(--amarillo-vibrante); text-align: center; padding: 1rem 0; font-weight:bold; font-size: 1.1rem;" id="emptySummaryMessage">
-                                Elige tus opciones y se te activará tu calculadora.
-                            </div>
+                    <h3 class="summary-title">Resumen de Inversión</h3>
+                    
+                    <div class="summary-list hide-prices" id="summaryList">
+                        <div style="color: var(--amarillo-vibrante); text-align: center; padding: 1rem 0; font-weight:bold; font-size: 1.1rem;" id="emptySummaryMessage">
+                            Elige tus opciones y rellena tus datos para activar la calculadora.
                         </div>
+                    </div>
 
+                    <div id="calculatorResults" style="display:none;">
                         <!-- Toggle Navarra -->
                     <div class="tax-toggle-wrapper">
                         <span class="tax-toggle-label">¿Empresa radicada en Navarra?</span>
