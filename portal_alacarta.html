@@ -522,6 +522,35 @@
         #summaryList.hide-prices .summary-item-price {
             display: none !important;
         }
+
+        .btn-action-compact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 0.4rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            line-height: 1.4;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            gap: 0.3rem;
+        }
+
+        .btn-action-compact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn-action-compact span {
+            display: block;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -562,8 +591,8 @@
                         <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Amigos Facebook</div>
                     </div>
                     <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
-                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">+ de 1.300.000</div>
-                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">VISUALIZACIONES IG (ÚLTIMOS 3 MESES)</div>
+                        <div style="font-family:'Montserrat',sans-serif; font-size: 1.2rem; font-weight: 900; color: var(--amarillo-vibrante);">+1.300.000</div>
+                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px;">Visualizaciones IG (últimos 3 meses)</div>
                     </div>
                     <div style="background: rgba(255,215,0,0.04); border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 1rem; text-align: center;">
                         <div style="font-family:'Montserrat',sans-serif; font-size: 1.8rem; font-weight: 900; color: var(--amarillo-vibrante);">1.000</div>
@@ -818,21 +847,19 @@
                             <span>TOTAL:</span>
                             <span id="totalPrice">0.00 €</span>
                         </div>
-                        <div style="font-size: 0.75rem; color: var(--texto-muted); text-align: right; margin-top: 4px;">
-                            *Precios sin IVA
-                        </div>
                     </div>
                     
-                    <div id="finalActionButtons" style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem;">
-                        <button type="submit" class="btn-submit" id="btnSubmit" style="background: var(--dorado-centenario); color: #000;">Enviar propuesta y solicitar dossier</button>
-                        <a href="https://calendly.com/cdpazagresa/30min" target="_blank" class="btn-submit" style="background: #fff; color: #000; text-decoration: none; text-align: center; border: 1px solid #ccc;">📅 Agenda una llamada</a>
-                        <a href="https://w.app/kmlwnn" target="_blank" class="btn-submit" style="background: #25D366; color: #fff; text-decoration: none; text-align: center;">💬 Escríbenos por WhatsApp</a>
+                    <div id="finalActionButtons" style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; align-items: stretch;">
+                        <button type="button" class="btn-action-compact" id="btnSubmit" onclick="submitLead(event)" style="background: var(--dorado-centenario); color: #000;">📤<br><span>Enviar propuesta</span></button>
+                        <a href="https://calendly.com/cdpazagresa/30min" target="_blank" class="btn-action-compact" style="background: #fff; color: #000; text-decoration: none; text-align: center;">📅<br><span>Agenda llamada</span></a>
+                        <a href="https://w.app/kmlwnn" target="_blank" class="btn-action-compact" style="background: #25D366; color: #fff; text-decoration: none; text-align: center;">💬<br><span>WhatsApp</span></a>
                     </div>
+                    <button onclick="resetCalculator()" style="margin-top: 1rem; width: 100%; background: transparent; border: 1px solid var(--gris-suave); color: var(--texto-muted); padding: 0.75rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--amarillo-vibrante)';this.style.color='var(--blanco-papel)'" onmouseout="this.style.borderColor='var(--gris-suave)';this.style.color='var(--texto-muted)'">← Volver y modificar opciones</button>
                     
                     </div> <!-- end calculatorResults -->
 
                     <!-- Datos del Solicitante -->
-                    <form id="leadForm" onsubmit="submitLead(event)">
+                    <form id="leadForm" onsubmit="return false;">
                         <div class="form-group">
                             <label for="companyName">Nombre de la Empresa</label>
                             <input type="text" id="companyName" class="form-input" required placeholder="Ej. Bodegas Azagra S.L.">
@@ -1005,31 +1032,48 @@
 
         // Mostrar calculadora (Paso 2)
         function showCalculator() {
-            const keys = Object.keys(selectedOptions);
-            if (keys.length === 0) {
-                alert('Por favor, selecciona al menos una opción para calcular tu inversión.');
-                return;
-            }
             const form = document.getElementById('leadForm');
+
+            // Validar que hayamos rellenado todos los campos obligatorios
             if (!form.checkValidity()) {
                 form.reportValidity();
                 return;
             }
-            
-            // Ocultar main y mostrar calculadora centrada
+
+            // Verificar que hay al menos una opción seleccionada
+            if (Object.keys(selectedOptions).length === 0) {
+                alert('Por favor, selecciona al menos una opción de patrocinio antes de continuar.');
+                return;
+            }
+
+            // Ocultar main y formulario, mostrar calculadora
             document.querySelector('main').style.display = 'none';
-            document.getElementById('btnCalc').style.display = 'none';
+            form.style.display = 'none';
             document.getElementById('calculatorResults').style.display = 'block';
-            
-            // Ajustar estilos para centrar
+            document.getElementById('summaryList').classList.remove('hide-prices');
+
+            // Centrar sidebar
             const sidebar = document.querySelector('.sidebar-container');
             sidebar.style.width = '100%';
             sidebar.style.maxWidth = '600px';
             sidebar.style.margin = '0 auto';
             sidebar.style.position = 'relative';
-            
-            document.getElementById('emptySummaryMessage').style.display = 'none';
-            
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetCalculator() {
+            document.getElementById('calculatorResults').style.display = 'none';
+            document.getElementById('leadForm').style.display = 'block';
+            document.querySelector('main').style.display = 'block';
+            document.getElementById('summaryList').classList.add('hide-prices');
+
+            const sidebar = document.querySelector('.sidebar-container');
+            sidebar.style.width = '';
+            sidebar.style.maxWidth = '';
+            sidebar.style.margin = '';
+            sidebar.style.position = '';
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
