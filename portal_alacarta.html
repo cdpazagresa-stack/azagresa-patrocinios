@@ -821,7 +821,7 @@
                             <span style="color: var(--success-color);" id="taxDeduccion">- 0.00 €</span>
                         </div>
                         <div class="tax-row">
-                            <span>Ahorro Gasto IS (~20%):</span>
+                            <span>Ahorro IS: gasto deducible (~20%):</span>
                             <span style="color: var(--success-color);" id="taxAhorroGasto">- 0.00 €</span>
                         </div>
                         <div class="tax-row-net">
@@ -1046,18 +1046,16 @@
                 return;
             }
 
-            // Ocultar main y formulario, mostrar calculadora
+            // Ocultar main y formulario, mostrar calculadora centrada
             document.querySelector('main').style.display = 'none';
             form.style.display = 'none';
             document.getElementById('calculatorResults').style.display = 'block';
             document.getElementById('summaryList').classList.remove('hide-prices');
 
-            // Centrar sidebar
-            const sidebar = document.querySelector('.sidebar-container');
-            sidebar.style.width = '100%';
-            sidebar.style.maxWidth = '600px';
-            sidebar.style.margin = '0 auto';
-            sidebar.style.position = 'relative';
+            // Convertir el grid en columna única centrada
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.style.gridTemplateColumns = '1fr';
+            mainContainer.style.maxWidth = '640px';
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -1068,11 +1066,10 @@
             document.querySelector('main').style.display = 'block';
             document.getElementById('summaryList').classList.add('hide-prices');
 
-            const sidebar = document.querySelector('.sidebar-container');
-            sidebar.style.width = '';
-            sidebar.style.maxWidth = '';
-            sidebar.style.margin = '';
-            sidebar.style.position = '';
+            // Restaurar el grid original
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.style.gridTemplateColumns = '';
+            mainContainer.style.maxWidth = '';
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
