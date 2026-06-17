@@ -889,14 +889,6 @@
 
         // Seleccionar Pack Cerrado
         function selectPack(packId, price) {
-            // Deseleccionar checkbox a la carta
-            document.querySelectorAll('.custom-option').forEach(el => {
-                el.classList.remove('selected');
-                const cb = el.querySelector('.option-checkbox');
-                if (cb) cb.checked = false;
-            });
-            selectedOptions = {};
-
             // Deseleccionar otros packs visualmente
             document.querySelectorAll('input[name="pack-selection"]').forEach(input => {
                 const parent = input.closest('.option-item');
@@ -908,6 +900,10 @@
                     parent.classList.remove('selected');
                 }
             });
+
+            if (currentPackSelected) {
+                delete selectedOptions[currentPackSelected.id];
+            }
 
             currentPackSelected = {
                 id: packId,
@@ -931,16 +927,6 @@
             // Si se hace clic en la tarjeta (no en el checkbox), cambiamos el estado del checkbox
             if (event.target !== checkbox) {
                 checkbox.checked = !checkbox.checked;
-            }
-
-            // Si hay un pack cerrado seleccionado, lo quitamos
-            if (currentPackSelected) {
-                document.querySelectorAll('input[name="pack-selection"]').forEach(input => {
-                    input.checked = false;
-                    input.closest('.option-item').classList.remove('selected');
-                });
-                currentPackSelected = null;
-                selectedOptions = {};
             }
 
             if (checkbox.checked) {
