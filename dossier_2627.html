@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Dossier Patrocinio y Publicidad 26/27 - C.D. Peña Azagresa</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --amarillo-vibrante: #FFD700;
+            --negro-mate: #1A1A1A;
+            --dorado-centenario: #B8860B;
+            --blanco-papel: #FDFDFD;
+            --gris-suave: #ECEFF1;
+            --texto-oscuro: #212121;
+            --texto-claro: #F5F5F5;
+        }
+
+        /* Configuración para Impresión y PDF */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--texto-oscuro);
+            background-color: #ECEFF1;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--blanco-papel);
+            margin: 20px auto;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            page-break-after: always;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20mm;
+        }
+
+        @media print {
+            body {
+                background-color: transparent;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 210mm;
+                height: 297mm;
+            }
+        }
+
+        /* Fondos y Marcos Especiales */
+        .page-dark {
+            background: linear-gradient(135deg, var(--negro-mate) 0%, #0d0d0d 100%);
+            color: var(--texto-claro);
+        }
+
+        /* Portada */
+        .portada {
+            border: 4mm solid var(--dorado-centenario);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25mm 15mm;
+        }
+
+        .portada-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-centenario {
+            width: 140px;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+        }
+
+        .portada-title-wrapper {
+            margin-top: 15mm;
+        }
+
+        .portada h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--amarillo-vibrante);
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        .portada h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, var(--amarillo-vibrante));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .portada-slogan {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: var(--dorado-centenario);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .portada-footer {
+            border-top: 1px solid var(--dorado-centenario);
+            padding-top: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Estructura Interna: Encabezados y Pies */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--dorado-centenario);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .page-header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--dorado-centenario);
+        }
+
+        .page-header-logo {
+            height: 35px;
+        }
+
+        .page-footer {
+            border-top: 1px solid var(--dorado-centenario);
+            padding-top: 8px;
+            font-size: 0.75rem;
+            color: var(--dorado-centenario);
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Títulos de sección */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--negro-mate);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-left: 5px solid var(--amarillo-vibrante);
+            padding-left: 12px;
+        }
+
+        .page-dark .section-title {
+            color: var(--amarillo-vibrante);
+            border-left-color: var(--dorado-centenario);
+        }
+
+        /* Estilo de Contenido */
+        p {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            text-align: justify;
+            color: #424242;
+        }
+
+        .page-dark p {
+            color: #E0E0E0;
+        }
+
+        /* Estadísticas y Cifras */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-card {
+            background-color: var(--gris-suave);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #CFD8DC;
+            transition: 0.2s;
+        }
+
+        .page-dark .stat-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--gris-suave);
+        }
+
+        .stat-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--dorado-centenario);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--texto-oscuro);
+            margin-top: 3px;
+        }
+
+        .page-dark .stat-label {
+            color: var(--texto-claro);
+        }
+
+        /* Tablas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background-color: var(--negro-mate);
+            color: var(--amarillo-vibrante);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 10px;
+            text-align: left;
+            border: 1px solid var(--negro-mate);
+        }
+
+        td {
+            padding: 9px 10px;
+            border: 1px solid #CFD8DC;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--gris-suave);
+        }
+
+        .page-dark td {
+            border-color: #37474F;
+        }
+
+        .page-dark tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Destacados */
+        .highlight-box {
+            background-color: rgba(184, 134, 11, 0.1);
+            border: 1px solid var(--dorado-centenario);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .highlight-box h4 {
+            color: var(--dorado-centenario);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .highlight-box p {
+            margin-bottom: 0;
+            font-size: 0.88rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PÁGINA 1: PORTADA -->
+    <div class="page page-dark portada">
+        <div class="portada-header">
+            <img class="logo-centenario" src="logo.png" onerror="this.src='https://placehold.co/120x120/1a1a1a/ffd700?text=CDPA'" alt="Escudo Peña Azagresa">
+            <div class="portada-title-wrapper">
+                <h2>C.D. Peña Azagresa</h2>
+                <h1>DOSSIER OFICIAL<br>DE PATROCINIO</h1>
+                <div class="portada-slogan">NUEVO SIGLO, MISMA PASIÓN</div>
+            </div>
+        </div>
+        <div style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 1.1rem; color: var(--amarillo-vibrante);">
+            TEMPORADA 2026/2027
+        </div>
+        <div class="portada-footer">
+            <span>AZAGRA (NAVARRA)</span>
+            <span>FUNDADO EN 1925</span>
+        </div>
+    </div>
+
+    <!-- PÁGINA 2: EL CLUB -->
+    <div class="page">
+        <div class="page-header">
+            <span class="page-header-title">El Club de Nuestra Tierra</span>
+            <img class="page-header-logo" src="logo.png" onerror="this.src='https://placehold.co/35x35/1a1a1a/ffd700?text=CDPA'">
+        </div>
+
+        <div>
+            <h2 class="section-title">Nuestra Historia y Filosofía</h2>
+            <p>
+                Tras superar con orgullo los 100 años de historia (1925-2025), el C.D. Peña Azagresa afronta la nueva temporada consolidado como el motor deportivo y social de Azagra. Somos un club de fútbol centenario, sin ánimo de lucro, que trabaja de forma incansable por y para la sociedad local y la cantera de la Ribera Alta de Navarra.
+            </p>
+            <p>
+                Nuestra misión principal es la formación de personas a través de la práctica del deporte, fomentando valores universales y necesarios como el **esfuerzo, la humildad, el respeto mutuo y el compromiso**. Contamos con una estructura robusta y equilibrada que da cabida a equipos masculinos y femeninos en todas las franjas de edad.
+            </p>
+
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; margin-top: 20px; color: var(--dorado-centenario); font-weight: 800;">NUESTRAS CIFRAS DE IMPACTO</h3>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">334</div>
+                    <div class="stat-label">Jugadores activos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">20</div>
+                    <div class="stat-label">Equipos (14 masc / 6 fem)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4.532</div>
+                    <div class="stat-label">Seguidores Instagram (1.3M+ vis)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4.101</div>
+                    <div class="stat-label">Seguidores Facebook (260k+ vis)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">513</div>
+                    <div class="stat-label">Canal de WhatsApp</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1.000</div>
+                    <div class="stat-label">Asistencia media fin de semana</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Dossier de Patrocinios 26/27</span>
+            <span>Página 2</span>
+        </div>
+    </div>
+
+    <!-- PÁGINA 3: BENEFICIOS FISCALES -->
+    <div class="page">
+        <div class="page-header">
+            <span class="page-header-title">Ventajas y Retorno Fiscal</span>
+            <img class="page-header-logo" src="logo.png" onerror="this.src='https://placehold.co/35x35/1a1a1a/ffd700?text=CDPA'">
+        </div>
+
+        <div>
+            <h2 class="section-title">Inversión con Retorno Garantizado</h2>
+            <p>
+                Asociar la marca de tu negocio al C.D. Peña Azagresa no solo aporta notoriedad de marca ante miles de personas de forma física y digital. Gracias a la calificación oficial del club, las empresas obtienen excelentes **incentivos fiscales** en Navarra.
+            </p>
+            
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.2rem; margin-top: 15px; color: var(--dorado-centenario); font-weight: 800; text-transform: uppercase;">Mecenazgo Deportivo (Navarra)</h3>
+            <p>
+                Bajo la **Ley Foral 26/2016 de Mecenazgo Deportivo**, las cantidades destinadas a patrocinar las actividades del club (debidamente formalizadas por contrato oficial) disfrutan de una espectacular desgravación en el **Impuesto sobre Sociedades**:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tramo de Inversión Anual</th>
+                        <th>Porcentaje de Deducción Directa en Cuota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hasta 30.000 € inclusive</td>
+                        <td><strong>30 % de Deducción</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Exceso hasta 60.000 €</td>
+                        <td><strong>35 % de Deducción</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Exceso sobre 60.000 €</td>
+                        <td><strong>40 % de Deducción</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Patrocinio exclusivo Fútbol Femenino</td>
+                        <td><strong>40 % de Deducción (Desde el primer €)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="highlight-box">
+                <h4>Ahorro Adicional por Gasto Deducible</h4>
+                <p>
+                    Además de la deducción en la cuota líquida, el 100% del patrocinio califica como **gasto fiscalmente deducible** en el Impuesto de Sociedades, lo que representa un ahorro directo adicional de entre el 20% y el 25% dependiendo del tipo impositivo de tu empresa. El retorno neto total de la inversión supera el **50% del importe bruto aportado**.
+                </p>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Dossier de Patrocinios 26/27</span>
+            <span>Página 3</span>
+        </div>
+    </div>
+
+    <!-- PÁGINA 4: PACKS DE PATROCINIO -->
+    <div class="page page-dark">
+        <div class="page-header">
+            <span class="page-header-title">Packs Cerrados de Colaboración</span>
+            <img class="page-header-logo" src="logo.png" onerror="this.src='https://placehold.co/35x35/1a1a1a/ffd700?text=CDPA'">
+        </div>
+
+        <div>
+            <h2 class="section-title">Packs de Patrocinio</h2>
+            <p>
+                Hemos diseñado varias modalidades de patrocinio que cubren todas las necesidades y presupuestos, garantizando que cada empresa encuentre su espacio óptimo.
+            </p>
+
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--amarillo-vibrante); margin-top: 15px; text-transform: uppercase;">★ PACK PLATINO - A Consultar</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 8px;">
+                Reservado a los sponsors principales del club. Incluye espacio exclusivo frontal en la camiseta oficial del primer equipo (1ª Autonómica), lona de 4m perimetral, pantalla LED ilimitada, presencia de marca en portada de la web y toda la cartelería.
+            </p>
+
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--amarillo-vibrante); margin-top: 12px; text-transform: uppercase;">★ PACK ORO - 1.000 € + IVA</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 8px;">
+                - Publicidad en Ropa: Zona trasera o manga izquierda en camiseta 1ª Autonómica, o frontal en sudaderas/prendas de entreno.<br>
+                - Soporte Físico: Lona perimetral grande (4 x 0.8 metros).<br>
+                - Digital: Presencia en pantalla LED a pie de campo toda la temporada y logo en Peña Azagresa TV.
+            </p>
+
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--amarillo-vibrante); margin-top: 12px; text-transform: uppercase;">★ PACK PLATA - 600 € + IVA</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 8px;">
+                - Publicidad en Ropa: Frontal en camiseta de juego de 1ª Regional o Fútbol Base.<br>
+                - Soporte Físico: Lona perimetral estándar en el campo Miguel Sola (3 x 0.8 metros).<br>
+                - Beneficios: 2 abonos de temporada y logotipo en sección patrocinadores de la web.
+            </p>
+
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--amarillo-vibrante); margin-top: 12px; text-transform: uppercase;">★ PACK BRONCE - 400 € + IVA</h3>
+            <p style="font-size: 0.9rem; margin-bottom: 8px;">
+                - Publicidad en Ropa: Trasera en camiseta 1ª Regional o Fútbol Base.<br>
+                - Soporte Físico: Lona perimetral estándar (3 x 0.8 metros).<br>
+                - Digital: Presencia trimestral en pantalla LED.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>Dossier de Patrocinios 26/27</span>
+            <span>Página 4</span>
+        </div>
+    </div>
+
+    <!-- PÁGINA 5: FORMATOS DETALLADOS -->
+    <div class="page">
+        <div class="page-header">
+            <span class="page-header-title">Opciones A La Carta</span>
+            <img class="page-header-logo" src="logo.png" onerror="this.src='https://placehold.co/35x35/1a1a1a/ffd700?text=CDPA'">
+        </div>
+
+        <div>
+            <h2 class="section-title">Formatos Físicos y Digitales</h2>
+            
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--dorado-centenario); text-transform: uppercase;">Publicidad Física en Estadio</h3>
+            <p>
+                - **Lonas perimetrales:** Visibilidad directa de todos los espectadores en partidos y entrenamientos.<br>
+                - **Torretas de luz:** Excelente impacto visual vertical por 200€ (2 torretas) o 350€ (4 torretas).<br>
+                - **Tablón campo de fútbol:** Logotipo 80x50cm por solo 100€/temporada.
+            </p>
+
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--dorado-centenario); margin-top: 15px; text-transform: uppercase;">Pantalla LED de Campo (6 m²)</h3>
+            <p>
+                Formato digital premium y dinámico (vídeo/imagen de 10-15s en rotación constante) con enorme impacto visual ("efecto Wow").<br>
+                - **Tarifa Temporada:** 100€ (3.000 emisiones)<br>
+                - **Tarifa Trimestral:** 50€ (900 emisiones)<br>
+                - **Tarifa Mensual:** 20€ (300 emisiones)
+            </p>
+
+            <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.1rem; color: var(--dorado-centenario); margin-top: 15px; text-transform: uppercase;">Plataforma Streaming E+ y Digital</h3>
+            <p>
+                Emisión en directo de más de 200 partidos y torneos jugados en el estadio Miguel Sola.<br>
+                - **Banner Completo Exclusivo (480*70 px):** 1.200€/temporada o 500€/trimestre.<br>
+                - **Banner Compartido Pequeño (220*70 px):** 500€/temporada o 250€/trimestre.<br>
+                - **Banners Redes Sociales (RRSS):** Presencia fija en gráficos de convocatorias/alineaciones: 300€/temporada.
+            </p>
+        </div>
+
+        <div class="page-footer">
+            <span>Dossier de Patrocinios 26/27</span>
+            <span>Página 5</span>
+        </div>
+    </div>
+
+    <!-- PÁGINA 6: CONTACTO -->
+    <div class="page page-dark" style="text-align: center; justify-content: space-between;">
+        <div class="page-header">
+            <span class="page-header-title" style="color: var(--amarillo-vibrante);">¡Únete a la Familia Peña Azagresa!</span>
+            <img class="page-header-logo" src="logo.png" onerror="this.src='https://placehold.co/35x35/1a1a1a/ffd700?text=CDPA'">
+        </div>
+
+        <div style="margin: auto 0; padding: 0 10mm;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--amarillo-vibrante); font-style: italic; margin-bottom: 15px;">¿Por qué colaborar ahora?</h2>
+            <p style="text-align: center; font-size: 1.05rem; margin-bottom: 25px;">
+                Colaborar en esta temporada especial de consolidación centenaria posiciona tu negocio como un patrocinador comprometido con el futuro de nuestra juventud y los valores de Navarra.
+            </p>
+
+            <div style="background-color: rgba(255, 255, 255, 0.05); border: 2px solid var(--dorado-centenario); border-radius: 12px; padding: 25px; margin-bottom: 30px;">
+                <h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; color: var(--amarillo-vibrante); margin-bottom: 15px; text-transform: uppercase;">CONTACTO Y GESTIÓN</h3>
+                <p style="text-align: center; margin-bottom: 8px; font-size: 1rem; color: #fff;">
+                    <strong>Persona de Contacto:</strong> Iván Azcona
+                </p>
+                <p style="text-align: center; margin-bottom: 8px; font-size: 1rem; color: #fff;">
+                    <strong>Teléfono y WhatsApp:</strong> 626 203 711
+                </p>
+                <p style="text-align: center; margin-bottom: 8px; font-size: 1rem; color: #fff;">
+                    <strong>Email Oficial:</strong> cdpazagresa@gmail.com
+                </p>
+                <p style="text-align: center; margin-bottom: 0; font-size: 1rem; color: #fff;">
+                    <strong>Web Oficial:</strong> www.peñaazagresa.es
+                </p>
+            </div>
+
+            <div style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--dorado-centenario); letter-spacing: 2px;">
+                ¡AÚPA PEÑA!
+            </div>
+        </div>
+
+        <div class="page-footer" style="border-color: var(--dorado-centenario);">
+            <span style="color: var(--dorado-centenario);">Dossier de Patrocinios 26/27</span>
+            <span style="color: var(--dorado-centenario);">Página 6</span>
+        </div>
+    </div>
+
+</body>
+</html>
