@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Contrato de Patrocinio Publicitario - C.D. Peña Azagresa</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 40px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin: 0;
+        }
+        h2 {
+            font-size: 1.1rem;
+            color: #FFD700;
+            margin: 5px 0 0;
+            text-transform: uppercase;
+            background-color: #1a1a1a;
+            display: inline-block;
+            padding: 2px 10px;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 25px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            color: #1a1a1a;
+        }
+        .text-block {
+            margin-top: 15px;
+            text-align: justify;
+        }
+        .signatures {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            width: 45%;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img class="logo" src="https://cdpazagresa-stack.github.io/azagresa-patrocinios/logo.png" onerror="this.src='https://placehold.co/80x80/1a1a1a/ffd700?text=CDPA'" alt="Escudo Peña Azagresa">
+        <h1>Contrato de Patrocinio Publicitario</h1>
+        <h2>Temporada 2026/2027</h2>
+    </div>
+
+    <p>En Azagra, a {{fecha_contrato}}</p>
+
+    <div class="section-title">REUNIDOS</div>
+    <div class="text-block">
+        <p>De una parte, el <strong>CLUB DEPORTIVO PEÑA AZAGRESA</strong>, con N.I.F. G31093125 y domicilio social en C/ Ctra. Variante, s/n Km. 50, 31560 Azagra (Navarra), representado en este acto por Don <strong>Iván Azcona</strong>, en calidad de representante de la Junta Directiva.</p>
+        <p>Y de otra parte, la empresa <strong>{{nombre_empresa}}</strong>, con N.I.F. {{nif_empresa}} y domicilio en {{direccion_empresa}}, representada en este acto por Don/Doña {{representante_empresa}}, en calidad de {{cargo_representante}}.</p>
+        <p>Ambas partes se reconocen mutuamente capacidad legal suficiente para obligarse y suscribir el presente Contrato de Patrocinio, a tal fin,</p>
+    </div>
+
+    <div class="section-title">EXPONEN</div>
+    <div class="text-block">
+        <p>I. Que el <strong>C.D. Peña Azagresa</strong> es un club deportivo que compite en ligas federadas y posee diversos canales publicitarios físicos y digitales de difusión pública.</p>
+        <p>II. Que la empresa <strong>{{nombre_empresa}}</strong> está interesada en promocionar comercialmente su marca, productos o servicios a través de los soportes publicitarios del club para la temporada 2026/27.</p>
+        <p>III. Que ambas partes acuerdan formalizar el presente Contrato de Patrocinio de conformidad con las siguientes:</p>
+    </div>
+
+    <div class="section-title">ESTIPULACIONES</div>
+    <div class="text-block">
+        <p><strong>PRIMERA. Objeto del Contrato.</strong> La empresa patrocinadora contrata los servicios de publicidad del C.D. Peña Azagresa para promocionar su marca comercial a través de los canales del club durante la temporada deportiva 2026/27.</p>
+        <p><strong>SEGUNDA. Precio y Forma de Pago.</strong> La empresa patrocinadora abonará al club la cantidad total de <strong>{{cantidad_patrocinio}} €</strong> más el 21% de IVA correspondiente (Total: {{total_con_iva}} €), que será pagada mediante transferencia bancaria tras la emisión de la correspondiente factura comercial.</p>
+        <p><strong>TERCERA. Soportes Publicitarios Acordados.</strong> El C.D. Peña Azagresa se compromete a insertar la publicidad de la empresa patrocinadora en los siguientes soportes y formatos:</p>
+        <p style="padding-left: 20px; font-style: italic;">{{detalle_soportes_acordados}}</p>
+        <p><strong>CUARTA. Vigencia.</strong> El presente contrato entrará en vigor en la fecha de su firma y finalizará el 30 de junio de 2027.</p>
+        <p><strong>QUINTA. Jurisdicción.</strong> Para resolver cualquier controversia que pueda surgir de la interpretación o ejecución del presente contrato, ambas partes se someten expresamente a la jurisdicción de los Juzgados de Estella/Lizarra (Navarra), con renuncia a cualquier otro fuero que pudiera corresponderles.</p>
+    </div>
+
+    <div class="signatures">
+        <div class="signature-box">
+            Por el C.D. Peña Azagresa<br>
+            <strong>Iván Azcona</strong>
+        </div>
+        <div class="signature-box">
+            Por {{nombre_empresa}}<br>
+            <strong>{{representante_empresa}}</strong>
+        </div>
+    </div>
+
+</body>
+</html>

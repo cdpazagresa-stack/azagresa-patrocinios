@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Convenio de Colaboración - Mecenazgo Deportivo Navarra</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 40px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #B8860B;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .logo {
+            height: 80px;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            margin: 0;
+        }
+        h2 {
+            font-size: 1.1rem;
+            color: #B8860B;
+            margin: 5px 0 0;
+            text-transform: uppercase;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 25px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            color: #1a1a1a;
+        }
+        .text-block {
+            margin-top: 15px;
+            text-align: justify;
+        }
+        .signatures {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            width: 45%;
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 10px;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img class="logo" src="https://cdpazagresa-stack.github.io/azagresa-patrocinios/logo.png" onerror="this.src='https://placehold.co/80x80/1a1a1a/ffd700?text=CDPA'" alt="Escudo Peña Azagresa">
+        <h1>Convenio de Colaboración de Mecenazgo Deportivo</h1>
+        <h2>Bajo la Ley Foral 26/2016 de Navarra</h2>
+    </div>
+
+    <p>En Azagra, a {{fecha_contrato}}</p>
+
+    <div class="section-title">REUNIDOS</div>
+    <div class="text-block">
+        <p>De una parte, el <strong>CLUB DEPORTIVO PEÑA AZAGRESA</strong>, con N.I.F. G31093125 y domicilio social en C/ Ctra. Variante, s/n Km. 50, 31560 Azagra (Navarra), representado en este acto por Don <strong>Iván Azcona</strong>, en calidad de representante de la Junta Directiva.</p>
+        <p>Y de otra parte, la empresa <strong>{{nombre_empresa}}</strong>, con N.I.F. {{nif_empresa}} y domicilio en {{direccion_empresa}}, representada en este acto por Don/Doña {{representante_empresa}}, en calidad de {{cargo_representante}}.</p>
+        <p>Ambas partes se reconocen mutuamente capacidad legal suficiente para obligarse y suscribir el presente Convenio de Colaboración, a tal fin,</p>
+    </div>
+
+    <div class="section-title">EXPONEN</div>
+    <div class="text-block">
+        <p>I. Que el <strong>C.D. Peña Azagresa</strong> es una asociación deportiva sin ánimo de lucro declarada oficialmente de <strong>"Interés Social"</strong> por el Instituto Navarro del Deporte, lo que le habilita para la captación de incentivos de Mecenazgo Deportivo al amparo de la Ley Foral 26/2016 de Navarra.</p>
+        <p>II. Que la empresa <strong>{{nombre_empresa}}</strong> desea colaborar económicamente con el club para el fomento, desarrollo y promoción de la práctica del fútbol en sus diversas categorías y modalidades, acogiéndose a los incentivos fiscales previstos por la citada legislación de Navarra.</p>
+        <p>III. Que ambas partes acuerdan formalizar el presente Convenio de Colaboración de conformidad con las siguientes:</p>
+    </div>
+
+    <div class="section-title">ESTIPULACIONES</div>
+    <div class="text-block">
+        <p><strong>PRIMERA. Objeto del Convenio.</strong> La empresa colaboradora se compromete a realizar una aportación económica en concepto de mecenazgo deportivo para el sostenimiento de las actividades deportivas del C.D. Peña Azagresa durante la temporada 2026/2027.</p>
+        <p><strong>SEGUNDA. Aportación Económica.</strong> El importe total de la aportación económica se fija en la cantidad de <strong>{{cantidad_patrocinio}} €</strong> (IVA no aplicable en concepto de Mecenazgo Deportivo puro), que será abonada mediante transferencia bancaria al número de cuenta del club titularidad de la Peña Azagresa en los plazos acordados.</p>
+        <p><strong>TERCERA. Difusión publicitaria / Retorno.</strong> En contraprestación por la ayuda recibida, el C.D. Peña Azagresa se compromete a difundir la colaboración de la empresa patrocinadora mediante los soportes publicitarios acordados en su solicitud de patrocinio:</p>
+        <p style="padding-left: 20px; font-style: italic;">{{detalle_soportes_acordados}}</p>
+        <p><strong>CUARTA. Certificado de Mecenazgo.</strong> El C.D. Peña Azagresa se compromete a emitir y entregar a la empresa patrocinadora el correspondiente Certificado Oficial de Aportaciones (Modelo 182 / Hacienda de Navarra) antes de la finalización del ejercicio fiscal para que esta pueda aplicar las desgravaciones fiscales del 30% al 40% en su Impuesto sobre Sociedades.</p>
+        <p><strong>QUINTA. Vigencia.</strong> El presente convenio tendrá una vigencia correspondiente a la Temporada Deportiva 2026/2027, finalizando de forma automática el 30 de junio de 2027.</p>
+    </div>
+
+    <div class="signatures">
+        <div class="signature-box">
+            Por el C.D. Peña Azagresa<br>
+            <strong>Iván Azcona</strong>
+        </div>
+        <div class="signature-box">
+            Por {{nombre_empresa}}<br>
+            <strong>{{representante_empresa}}</strong>
+        </div>
+    </div>
+
+</body>
+</html>
